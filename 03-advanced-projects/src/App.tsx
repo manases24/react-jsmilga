@@ -1,9 +1,9 @@
-import { MultipleReturnsFetchData } from "./tutorial/03-conditional-rendering/02-multiple-returns-fetch-data";
+import { ShortCircuitOverview } from "./tutorial/03-conditional-rendering/04-short-circuit-overview";
 
 export function App() {
   return (
     <div className="container">
-      <MultipleReturnsFetchData />
+      <ShortCircuitOverview />
     </div>
   );
 }
