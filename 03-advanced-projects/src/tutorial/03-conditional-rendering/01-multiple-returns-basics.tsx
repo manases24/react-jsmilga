@@ -12,16 +12,10 @@ export function MultipleReturnsBasics() {
 
   // can return entire app
   if (isLoading) {
-    return <Loading />;
+    return <h2>Loading...</h2>
   }
 
   return <h2>My App</h2>;
 }
 
-function Loading() {
-  return (
-    <>
-      <h2>Loading...</h2>
-    </>
-  );
-}
+

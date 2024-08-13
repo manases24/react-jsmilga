@@ -1,9 +1,9 @@
-import { CodeExample } from "./tutorial/02-useEffect/01-code-example";
+import { MultipleReturnsFetchData } from "./tutorial/03-conditional-rendering/02-multiple-returns-fetch-data";
 
 export function App() {
   return (
     <div className="container">
-      <CodeExample />
+      <MultipleReturnsFetchData />
     </div>
   );
 }
