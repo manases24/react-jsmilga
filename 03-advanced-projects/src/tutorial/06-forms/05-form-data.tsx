@@ -1,10 +1,29 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 export const UncontrolledInputs = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number>(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    // Obtén los valores uno por uno
+    const name = formData.get("name");
+    console.log(name);
+
+    // Obtén todos los valores
+    const newUser = Object.fromEntries(formData.entries());
+    console.log(newUser);
+
+    // Realiza alguna acción (petición POST, agregar a una lista, etc.)
+    // ...
+
+    // Incrementa el valor (forzando un re-render)
+    setValue(value + 1);
+
+    // Restablece los valores del formulario
+    e.currentTarget.reset();
   };
 
   return (
@@ -14,7 +33,7 @@ export const UncontrolledInputs = () => {
         {/* name */}
         <div className="form-row">
           <label htmlFor="name" className="form-label">
-            name
+            Name
           </label>
           <input type="text" className="form-input" id="name" name="name" />
         </div>
@@ -25,7 +44,7 @@ export const UncontrolledInputs = () => {
           </label>
           <input type="email" className="form-input" id="email" name="email" />
         </div>
-        {/* email */}
+        {/* password */}
         <div className="form-row">
           <label htmlFor="password" className="form-label">
             Password
@@ -39,7 +58,7 @@ export const UncontrolledInputs = () => {
         </div>
 
         <button type="submit" className="btn btn-block">
-          submit
+          Submit
         </button>
       </form>
     </div>
