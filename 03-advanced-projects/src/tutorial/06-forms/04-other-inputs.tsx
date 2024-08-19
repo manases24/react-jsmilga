@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 
-const frameworks = ["react", "angular", "vue", "svelte"];
+const frameworks = ["react", "angular", "vue", "svelte", "astro", "next"];
 
 export const OtherInputs = () => {
   const [shipping, setShipping] = useState<boolean>(false);
