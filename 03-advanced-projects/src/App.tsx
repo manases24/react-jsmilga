@@ -1,9 +1,11 @@
-import { UserChallenge } from "./tutorial/03-conditional-rendering/07-user-challenge";
+// import { UserChallenge } from "./tutorial/06-forms/02-user-challenge";
+
+import { MultipleInputs } from "./tutorial/06-forms/03-multiple-inputs";
 
 export function App() {
   return (
     <div className="container">
-      <UserChallenge />
+      <MultipleInputs/>
     </div>
   );
 }
