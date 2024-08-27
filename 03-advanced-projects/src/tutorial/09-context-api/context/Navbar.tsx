@@ -22,6 +22,7 @@ export const useAppContext = () => {
 
 export function Navbar() {
   const [user, setUser] = useState<{ name: string } | null>({ name: "bob" });
+  
   const logout = () => {
     setUser(null);
   };
