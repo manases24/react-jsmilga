@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';             // Importamos el hook useState de React para manejar el estado local.
+import { questions as data } from './data';   // Importamos las preguntas desde un archivo de datos (presumiblemente un array de objetos).
+import { Questions } from './Questions';      // Importamos el componente Questions, que probablemente renderiza la lista de preguntas.
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Estado local que almacena las preguntas.
+  const [questions, setQuestions] = useState(data);
+
+  // Estado local que almacena el ID de la pregunta actualmente activa (expandida).
+  const [activeId, setActiveId] = useState<number | null>(null);
+
+  // Función que se llama cuando se hace clic en una pregunta para expandirla o contraerla.
+  const toggleQuestion = (id: number) => {
+    // Si la pregunta clicada ya está activa, la desactivamos; de lo contrario, activamos la nueva.
+    const newActiveId = id === activeId ? null : id;
+    setActiveId(newActiveId);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main>
+      {/* Renderizamos el componente Questions, pasándole las preguntas, el ID activo y la función para alternar entre preguntas */}
+      <Questions
+        questions={questions}
+        activeId={activeId}
+        toggleQuestion={toggleQuestion}
+      />
+    </main>
+  );
 }
 
-export default App
+export default App;
