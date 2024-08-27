@@ -338,3 +338,68 @@ ul {
   text-transform: capitalize;
   display: inline-block;
 }
+
+/* Estilos generales para los botones y paneles */
+button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.panel-light,
+.button-light {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.panel-dark,
+.button-dark {
+  background-color: #333;
+  color: #f9f9f9;
+}
+
+/* Estilos para el panel */
+.panel-light {
+  border: 2px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.panel-dark {
+  border: 2px solid #666;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+/* Estilos para los botones */
+.button-light {
+  background-color: #007bff;
+  color: white;
+  margin: 5px;
+}
+
+.button-dark {
+  background-color: #1e90ff;
+  color: white;
+  margin: 5px;
+}
+
+/* Hover effects */
+.button-light:hover {
+  background-color: #0056b3;
+}
+
+.button-dark:hover {
+  background-color: #0b63ce;
+}
+
+/* Estilos adicionales para el componente Panel */
+.panel-light h1,
+.panel-dark h1 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
