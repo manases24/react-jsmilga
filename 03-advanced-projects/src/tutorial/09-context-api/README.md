@@ -1,6 +1,3 @@
-Claro, aquí tienes una versión aún más detallada del `README.md`, explicando a fondo qué es el contexto, el proveedor del contexto, `useContext`, y cómo funcionan en conjunto.
-
-````markdown
 # Ejemplo de Context API en React
 
 Este proyecto demuestra cómo utilizar la Context API en React para compartir un estado global (en este caso, un tema claro u oscuro) entre componentes sin necesidad de pasar `props` manualmente a cada nivel del árbol de componentes.
@@ -42,6 +39,7 @@ type Theme = "light" | "dark";
 // Crear el contexto con un valor predeterminado
 const ThemeContext = createContext<Theme>("light");
 ```
+
 ````
 
 - **`type Theme`**: Define los posibles valores para el tema, `light` y `dark`.
@@ -183,3 +181,4 @@ button {
   font-size: 24px;
 }
 ```
+````
