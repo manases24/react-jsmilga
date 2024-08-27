@@ -179,7 +179,3 @@ button {
   font-size: 24px;
 }
 ```
-
-```
-
-```
