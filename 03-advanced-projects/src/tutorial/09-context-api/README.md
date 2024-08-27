@@ -40,8 +40,6 @@ type Theme = "light" | "dark";
 const ThemeContext = createContext<Theme>("light");
 ```
 
-````
-
 - **`type Theme`**: Define los posibles valores para el tema, `light` y `dark`.
 - **`createContext<Theme>("light")`**: Crea un contexto con un valor predeterminado de `light`. Este valor predeterminado se usará si un componente intenta consumir el contexto fuera de un `Provider`.
 
@@ -181,4 +179,7 @@ button {
   font-size: 24px;
 }
 ```
-````
+
+```
+
+```
