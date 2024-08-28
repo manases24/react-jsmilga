@@ -1,9 +1,13 @@
+import { FriendList } from "./FriendList";
+
 function App() {
   return (
-    <div>
-      Hello
+    <div className="app">
+      <div className="sidebar">
+        <FriendList />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
