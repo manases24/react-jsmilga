@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { initialFriends } from "./data";
-import { InitialFriendsTypes } from "./types";
-import { Friend } from "./Friend"; 
+// FriendList.tsx
+import React from 'react';
+import { InitialFriendsTypes } from './types';
+import { Friend } from './Friend'; 
 
-export const FriendList = () => {
-  const [friends, setFriends] = useState<InitialFriendsTypes[]>(initialFriends);
+interface FriendListProps {
+  friends: InitialFriendsTypes[];
+}
 
+export const FriendList: React.FC<FriendListProps> = ({ friends }) => {
   return (
-    <>
-      <ul>
-        {friends.map((friend) => (
-          <Friend key={friend.id} {...friend} />
-        ))}
-      </ul>
-    </>
+    <ul>
+      {friends.map((friend) => (
+        <Friend key={friend.id} {...friend} />
+      ))}
+    </ul>
   );
 };

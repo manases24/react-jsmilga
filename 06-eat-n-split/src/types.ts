@@ -6,3 +6,7 @@ export type InitialFriendsTypes = {
 };
 
 export type OnAddFriendType = (newFriend: InitialFriendsTypes) => void;
+
+export type FormAddFriendProps = {
+  onAddFriend: OnAddFriendType;
+};

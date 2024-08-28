@@ -1,10 +1,6 @@
 import { FormEvent, useState } from "react";
-import { OnAddFriendType } from "./types";
+import { FormAddFriendProps } from "./types";
 import { Button } from "./Button";
-
-interface FormAddFriendProps {
-  onAddFriend: OnAddFriendType;
-}
 
 export const FormAddFriend = ({ onAddFriend }: FormAddFriendProps) => {
   const [name, setName] = useState("");
@@ -21,8 +17,10 @@ export const FormAddFriend = ({ onAddFriend }: FormAddFriendProps) => {
       image: `${image}?=${crypto.randomUUID()}`,
       balance: 0,
     };
+    
     onAddFriend(newFriend);
     setName("");
+    setImage("https://i.pravatar.cc/48");
   }
 
   return (
@@ -40,7 +38,6 @@ export const FormAddFriend = ({ onAddFriend }: FormAddFriendProps) => {
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
-
       <Button>Add</Button>
     </form>
   );
