@@ -6,7 +6,8 @@ import { menuData } from "./api/api";
 import { Categories } from "./Categories";
 
 const categories = menuData.map((item) => item.category);
-const allCategories = ["all", ...categories];
+const allCategories: string[] = ["all", ...[...new Set(categories)]];
+
 
 function App() {
   const [menuItems, setMenuItems] = useState<APIMenu[]>(menuData);
@@ -15,6 +16,7 @@ function App() {
   function filterItems(category: string) {
     if (category === "all") {
       setMenuItems(menuData);
+      return
     }
 
     const newItems = menuData.filter((item) => item.category === category);
