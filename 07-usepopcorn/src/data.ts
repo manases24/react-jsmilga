@@ -1,6 +1,6 @@
-import { Movie, Watched } from "./types";
+import { MovieType, Watched } from "./types";
 
-export const tempMovieData: Movie[] = [
+export const tempMovieData: MovieType[] = [
   {
     imdbID: "tt1375666",
     Title: "Inception",
