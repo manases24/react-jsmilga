@@ -1,4 +1,4 @@
-export const menu = [
+export const menuData = [
   {
     id: crypto.randomUUID(),
     title: "buttermilk pancakes",
