@@ -1,18 +1,18 @@
-// FriendList.tsx
 import React from 'react';
-import { InitialFriendsTypes } from './types';
-import { Friend } from './Friend'; 
+import { FriendsListProps } from './types';
+import {Friend} from './Friend';
 
-interface FriendListProps {
-  friends: InitialFriendsTypes[];
-}
+export const FriendsList: React.FC<FriendsListProps> = ({ friends, onSelection, selectedFriend }) => (
+  <ul>
+    {friends.map((friend) => (
+      <Friend
+        friend={friend}
+        key={friend.id}
+        selectedFriend={selectedFriend}
+        onSelection={onSelection}
+      />
+    ))}
+  </ul>
+);
 
-export const FriendList: React.FC<FriendListProps> = ({ friends }) => {
-  return (
-    <ul>
-      {friends.map((friend) => (
-        <Friend key={friend.id} {...friend} />
-      ))}
-    </ul>
-  );
-};
+

@@ -1,12 +1,14 @@
-type ButtonProps = {
-  children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
+import React from 'react';
 
-export function Button({ children, onClick }: ButtonProps) {
-  return (
-    <button className="button" onClick={onClick}>
-      {children}
-    </button>
-  );
+interface ButtonProps {
+  onClick?: () => void;
+  children: React.ReactNode;
 }
+
+export const Button: React.FC<ButtonProps> = ({ children, onClick }) => (
+  <button className="button" onClick={onClick}>
+    {children}
+  </button>
+);
+
+

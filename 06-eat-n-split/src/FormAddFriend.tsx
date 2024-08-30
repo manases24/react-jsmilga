@@ -1,26 +1,28 @@
-import { FormEvent, useState } from "react";
-import { FormAddFriendProps } from "./types";
-import { Button } from "./Button";
+// FormAddFriend.tsx
+import React, { useState } from 'react';
+import { FormAddFriendProps } from './types';
+import {Button} from './Button';
 
-export const FormAddFriend = ({ onAddFriend }: FormAddFriendProps) => {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("https://i.pravatar.cc/48");
+export const FormAddFriend: React.FC<FormAddFriendProps> = ({ onAddFriend }) => {
+  const [name, setName] = useState('');
+  const [image, setImage] = useState('https://i.pravatar.cc/48');
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (!name || !image) return;
 
+    const id = crypto.randomUUID();
     const newFriend = {
-      id: crypto.randomUUID(),
+      id,
       name,
-      image: `${image}?=${crypto.randomUUID()}`,
+      image: `${image}?=${id}`,
       balance: 0,
     };
-    
+
     onAddFriend(newFriend);
-    setName("");
-    setImage("https://i.pravatar.cc/48");
+    setName('');
+    setImage('https://i.pravatar.cc/48');
   }
 
   return (
@@ -38,7 +40,10 @@ export const FormAddFriend = ({ onAddFriend }: FormAddFriendProps) => {
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
+
       <Button>Add</Button>
     </form>
   );
 };
+
+
