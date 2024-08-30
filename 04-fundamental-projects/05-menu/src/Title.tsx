@@ -1,0 +1,10 @@
+import { APIMenu } from "./api/types";
+
+export const Title = ({ title }: Pick<APIMenu, 'title'>) => {
+  return (
+    <div className="title">
+      <h2>{title || "Default Title"}</h2>
+      <div className="title-underline"></div>
+    </div>
+  );
+};
