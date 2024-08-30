@@ -13,13 +13,15 @@ export const FormSplitBill: React.FC<FormSplitBillProps> = ({
   // Convert string to number safely
   const billValue = parseFloat(bill);
   const paidByUserValue = parseFloat(paidByUser);
-  const paidByFriend = billValue ? billValue - paidByUserValue : 0;
+  const paidByFriend = !isNaN(billValue) ? billValue - paidByUserValue : 0;
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
+    // Ensure valid number values
     if (isNaN(billValue) || isNaN(paidByUserValue)) return;
 
+    // Handle split bill calculation
     onSplitBill(whoIsPaying === "user" ? paidByFriend : -paidByUserValue);
   }
 
@@ -42,7 +44,11 @@ export const FormSplitBill: React.FC<FormSplitBillProps> = ({
       />
 
       <label>👫 {selectedFriend.name}'s expense</label>
-      <input type="text" disabled value={paidByFriend} />
+      <input
+        type="text"
+        disabled
+        value={isNaN(paidByFriend) ? "" : paidByFriend}
+      />
 
       <label>🤑 Who is paying the bill</label>
       <select

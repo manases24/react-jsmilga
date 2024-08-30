@@ -26,18 +26,19 @@ export default function App() {
   }
 
   function handleSplitBill(value: number) {
-    if (!selectedFriend) return;
-
-    setFriends((prevFriends) =>
-      prevFriends.map((friend) =>
-        friend.id === selectedFriend.id
-          ? { ...friend, balance: friend.balance + value }
-          : friend
-      )
-    );
-
-    setSelectedFriend(null);
+    if (selectedFriend) {
+      setFriends((friends) =>
+        friends.map((friend) =>
+          friend.id === selectedFriend.id
+            ? { ...friend, balance: friend.balance + value }
+            : friend
+        )
+      );
+  
+      setSelectedFriend(null); 
+    }
   }
+  
 
   return (
     <div className="app">
