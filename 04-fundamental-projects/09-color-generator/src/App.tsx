@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form } from "./Form";
 import Values from "values.js";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { ColorList } from "./ColorList";
 
 function App() {
@@ -20,8 +20,7 @@ function App() {
     <main>
       <Form addColor={addColor} />
       <ColorList colors={colors} />
-      {/* 
-  <ToastContainer position='top-center' /> */}
+      <ToastContainer position="top-center" />
     </main>
   );
 }
