@@ -4,6 +4,7 @@ import { SingleColorProps } from "./types";
 
 export const SingleColor = ({ color, index }: SingleColorProps) => {
   const { hex, weight } = color;
+
   const saveToClipboard = async () => {
     if (navigator.clipboard) {
       try {
@@ -16,6 +17,7 @@ export const SingleColor = ({ color, index }: SingleColorProps) => {
       toast.error("Clipboard access not available");
     }
   };
+  
   return (
     <article
       className={index > 10 ? "color color-light" : "color"}
