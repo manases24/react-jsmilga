@@ -5,7 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { ColorList } from "./ColorList";
 
 function App() {
-  const [colors, setColors] = useState(new Values("#f15025").all(10));
+  const [colors, setColors] = useState(new Values("#f15087").all(10));
 
   const addColor = (color: string) => {
     try {
