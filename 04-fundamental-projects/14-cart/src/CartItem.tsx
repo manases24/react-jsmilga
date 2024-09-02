@@ -1,13 +1,6 @@
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { useGlobalContext } from './context';
-
-interface CartItemProps {
-  id: string;
-  img: string;
-  title: string;
-  price: number;
-  amount: number;
-}
+import { CartItemProps } from './api/types';
 
 export const CartItem: React.FC<CartItemProps> = ({ id, img, title, price, amount }) => {
   const { remove, increase, decrease } = useGlobalContext();

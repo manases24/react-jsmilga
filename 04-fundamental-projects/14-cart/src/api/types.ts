@@ -27,3 +27,11 @@ export interface ActionType {
     cart?: CartItemType[];
   };
 }
+
+export type CartItemProps = {
+  id: string;
+  img: string;
+  title: string;
+  price: number;
+  amount: number;
+};
