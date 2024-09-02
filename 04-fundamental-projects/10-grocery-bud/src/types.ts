@@ -7,10 +7,10 @@ export type AddItemType = {
 export type ItemProps = {
   items: ItemType[];
   removeItem: (itemId: string) => void;
-  toggleItemCompleted: (itemId: string) => void;
+  editItem: (itemId: string) => void;
 };
 
 export type SingleItemProps = ItemType & {
   removeItem: (itemId: string) => void;
-  toggleItemCompleted: (itemId: string) => void;
+  editItem: (itemId: string) => void;
 };

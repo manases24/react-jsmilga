@@ -1,7 +1,7 @@
 import { SingleItem } from "./SingleItem";
 import { ItemProps } from "./types";
 
-export const Items = ({ items, removeItem, toggleItemCompleted }: ItemProps) => {
+export const Items = ({ items, removeItem, editItem }: ItemProps) => {
   return (
     <div className="items">
       {items.map((item) => (
@@ -9,7 +9,7 @@ export const Items = ({ items, removeItem, toggleItemCompleted }: ItemProps) => 
           key={item.id}
           {...item}
           removeItem={removeItem}
-          toggleItemCompleted={toggleItemCompleted}
+          editItem={editItem}
         />
       ))}
     </div>
