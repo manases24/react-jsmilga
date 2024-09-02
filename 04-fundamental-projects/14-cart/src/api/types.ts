@@ -1,14 +1,29 @@
-import { ReactNode } from "react";
-
-export type CartItemType = {
+export interface CartItemType {
   id: string;
   title: string;
-  price: string;
+  price: number;
   img: string;
   amount: number;
-};
+}
 
-// Define los tipos para las props del proveedor de contexto
-export type AppProviderProps = {
-  children: ReactNode;
-};
+export interface AppState {
+  loading: boolean;
+  cart: Map<string, CartItemType>;
+}
+
+export interface AppContextType extends AppState {
+  clearCart: () => void;
+  remove: (id: string) => void;
+  increase: (id: string) => void;
+  decrease: (id: string) => void;
+  totalAmount: number;
+  totalCost: number;
+}
+
+export interface ActionType {
+  type: string;
+  payload?: {
+    id?: string;
+    cart?: CartItemType[];
+  };
+}
