@@ -16,14 +16,26 @@ function App() {
   };
 
   const removeItem = (itemId: string) => {
-    const item = items.filter((i) => i.id !== itemId);
-    return item;
+    const newItem = items.filter((i) => i.id !== itemId);
+    setItems(newItem)
+  };
+
+  const toggleItemCompleted = (id: string) => {
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, completed: !item.completed } : item
+      )
+    );
   };
 
   return (
     <section className="section-center">
       <Form addItem={addItem} />
-      <Items items={items} removeItem={removeItem}/>
+      <Items
+        items={items}
+        removeItem={removeItem}
+        toggleItemCompleted={toggleItemCompleted}
+      />
     </section>
   );
 }

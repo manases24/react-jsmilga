@@ -6,20 +6,26 @@ export const SingleItem = ({
   name,
   completed,
   removeItem,
+  toggleItemCompleted,
 }: SingleItemProps) => {
-    const [isChecked, setIsChecked] = useState(completed)
+  const [isChecked, setIsChecked] = useState(completed);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+    toggleItemCompleted(id);
+  };
 
   return (
     <div className="single-item">
       <input
         type="checkbox"
         checked={isChecked}
-        onChange={() => setIsChecked(!completed)}
+        onChange={handleCheckboxChange}
       />
       <p
         style={{
           textTransform: "capitalize",
-          textDecoration: completed ? "line-through" : "none",
+          textDecoration: isChecked ? "line-through" : "none",
         }}
       >
         {name}
