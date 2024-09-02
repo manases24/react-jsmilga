@@ -9,9 +9,9 @@ import {
   FaDocker,
   FaGithubSquare,
 } from "react-icons/fa";
-import { SublinkType } from "./types"; 
+import { Sublink } from "./types";
 
-export const sublinks: SublinkType[] = [
+export const sublinks: Sublink[] = [
   {
     pageId: crypto.randomUUID(),
     page: "product",
@@ -19,19 +19,19 @@ export const sublinks: SublinkType[] = [
       {
         id: crypto.randomUUID(),
         label: "community",
-        icon: Fa500Px,
+        icon: <Fa500Px />,
         url: "/product/community",
       },
       {
         id: crypto.randomUUID(),
         label: "content",
-        icon: FaAccusoft,
+        icon: <FaAccusoft />,
         url: "/product/content",
       },
       {
         id: crypto.randomUUID(),
         label: "roles",
-        icon: FaAdversal,
+        icon: <FaAdversal />,
         url: "/product/roles",
       },
     ],
@@ -43,25 +43,25 @@ export const sublinks: SublinkType[] = [
       {
         id: crypto.randomUUID(),
         label: "developers",
-        icon: FaAvianex,
+        icon: <FaAvianex />,
         url: "/solutions/developers",
       },
       {
         id: crypto.randomUUID(),
         label: "content managers",
-        icon: FaBitcoin,
+        icon: <FaBitcoin />,
         url: "/solutions/content-managers",
       },
       {
         id: crypto.randomUUID(),
         label: "business teams",
-        icon: FaBtc,
+        icon: <FaBtc />,
         url: "/solutions/business-teams",
       },
       {
         id: crypto.randomUUID(),
         label: "ecommerce",
-        icon: FaCodiepie,
+        icon: <FaCodiepie />,
         url: "/solutions/ecommerce",
       },
     ],
@@ -73,13 +73,13 @@ export const sublinks: SublinkType[] = [
       {
         id: crypto.randomUUID(),
         label: "starters",
-        icon: FaDocker,
+        icon: <FaDocker />,
         url: "/resources/starters",
       },
       {
         id: crypto.randomUUID(),
         label: "showcase",
-        icon: FaGithubSquare,
+        icon: <FaGithubSquare />,
         url: "/resources/showcase",
       },
     ],
