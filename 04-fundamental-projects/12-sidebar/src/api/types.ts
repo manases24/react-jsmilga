@@ -12,3 +12,12 @@ export type SocialType = {
   url: string;
   icon: ReactNode;
 };
+
+export type AppContextType = {
+  isSidebarOpen: boolean;
+  isModalOpen: boolean;
+  openSidebar: () => void;
+  closeSidebar: () => void;
+  openModal: () => void;
+  closeModal: () => void;
+};
