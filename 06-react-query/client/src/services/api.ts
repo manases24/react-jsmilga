@@ -14,7 +14,7 @@ export const createTask = async (taskTitle: string): Promise<Task> => {
         title: taskTitle,
       }
     );
-    return response.taskList;
+    return response.taskList; // Asegúrate de que `response.task` esté definido en `TaskResponse`
   } catch (error) {
     console.error("Error creating task:", error);
     throw error;
@@ -26,7 +26,7 @@ export const editTask = async (
   isDone: boolean
 ): Promise<void> => {
   try {
-    await customFetch.patch<TaskResponse, { isDone: boolean }>(`/${taskId}`, {
+    await customFetch.patch<void, { isDone: boolean }>(`/${taskId}`, {
       isDone,
     });
   } catch (error) {
@@ -37,7 +37,7 @@ export const editTask = async (
 
 export const deleteTask = async (taskId: string): Promise<void> => {
   try {
-    await customFetch.delete(`/${taskId}`);
+    await customFetch.delete<void>(`/${taskId}`);
   } catch (error) {
     console.error("Error deleting task:", error);
     throw error;

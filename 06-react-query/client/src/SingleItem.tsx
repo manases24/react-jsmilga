@@ -1,23 +1,26 @@
-import { useState } from "react";
-import { SingleItemProps } from "./types";
+import { ItemType } from "./types";
+import { useDeleteTask, useEditTask } from "./services/hooks";
 
-export const SingleItem = ({
-  id,
-  title,
-  isDone,
-  removeItem,
-  editItem,
-}: SingleItemProps) => {
-  const [isChecked, setIsChecked] = useState(isDone);
+export const SingleItem = ({ id, title, isDone }: ItemType) => {
+  const { mutate: editTask } = useEditTask();
+  const { deleteTask, isLoading, isError, error } = useDeleteTask();
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-    editItem(id);
-  };
+  if (isLoading) {
+    // Mostrar estado de carga
+  }
+  
+  if (isError) {
+    // Manejar error
+    console.error(error);
+  }
 
   return (
     <div className="single-item">
-      <input type="checkbox" checked={isDone} onChange={handleCheckboxChange} />
+      <input
+        type="checkbox"
+        checked={isDone}
+        onChange={() => editTask({ taskId: id, isDone: !isDone })}
+      />
       <p
         style={{
           textTransform: "capitalize",
@@ -29,7 +32,8 @@ export const SingleItem = ({
       <button
         className="btn remove-btn"
         type="button"
-        onClick={() => removeItem(id)}
+        disabled={isLoading}
+        onClick={() => deleteTask({ taskId: id })}
       >
         delete
       </button>

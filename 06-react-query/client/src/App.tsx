@@ -69,7 +69,7 @@ function App() {
     <section className="section-center">
       <ToastContainer position="top-center" />
       <Form addItem={addItem} />
-      <Items items={items} removeItem={removeItem} editItem={editItem} />
+      <Items />
     </section>
   );
 }

@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createTask, editTask, deleteTask, fetchTasks } from "./api";
+import {
+  createTask,
+  editTask,
+  deleteTask as deleteTaskApi,
+  fetchTasks,
+} from "./api";
 import { toast } from "react-toastify";
 import {
   CreateTaskVariables,
@@ -8,6 +13,7 @@ import {
   Task,
 } from "./types";
 
+// Fetch tasks hook
 export const useFetchTasks = () => {
   const { isLoading, data, isError } = useQuery<Task[]>({
     queryKey: ["tasks"],
@@ -17,46 +23,57 @@ export const useFetchTasks = () => {
   return { isLoading, isError, data };
 };
 
+// Create task hook
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<Task, Error, CreateTaskVariables>({
-    mutationFn: ({ taskTitle }) => createTask(taskTitle),
+  return useMutation({
+    mutationFn: ({ taskTitle }: CreateTaskVariables) => createTask(taskTitle),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       toast.success("Task added");
     },
-    onError: (error) => {
+    onError: (error: Error) => {
       toast.error(error.message || "Error adding task");
     },
   });
 };
 
+// Edit task hook
 export const useEditTask = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, EditTaskVariables>({
-    mutationFn: ({ taskId, isDone }) => editTask(taskId, isDone),
+  return useMutation({
+    mutationFn: ({ taskId, isDone }: EditTaskVariables) =>
+      editTask(taskId, isDone),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
-    onError: (error) => {
+    onError: (error: Error) => {
       toast.error(error.message || "Error editing task");
     },
   });
 };
 
+// Delete task hook
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, DeleteTaskVariables>({
-    mutationFn: ({ taskId }) => deleteTask(taskId),
+  const mutation = useMutation({
+    mutationFn: ({ taskId }: DeleteTaskVariables) => deleteTaskApi(taskId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       toast.success("Task deleted");
     },
-    onError: (error) => {
+    onError: (error: Error) => {
       toast.error(error.message || "Error deleting task");
     },
   });
+
+  return {
+    deleteTask: mutation.mutate,
+    isLoading: mutation.status === "pending",
+    isError: mutation.isError,
+    error: mutation.error,
+  };
 };
