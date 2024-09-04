@@ -5,7 +5,7 @@ type FormProps = {
 };
 
 export const Form = ({ addColor }: FormProps) => {
-  const [color, setColor] = useState("#f15025"); // Inicializar con un valor por defecto
+  const [color, setColor] = useState("#f15025"); 
 
   const handleSubmit = (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
