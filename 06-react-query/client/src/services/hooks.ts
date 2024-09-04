@@ -13,74 +13,78 @@ import {
   Task,
 } from "./types";
 
-// Fetch tasks hook
+// Hook para obtener tareas
 export const useFetchTasks = () => {
+  // `useQuery` se usa para obtener datos. Requiere una clave de consulta y una función de consulta.
   const { isLoading, data, isError } = useQuery<Task[]>({
-    queryKey: ["tasks"],
-    queryFn: fetchTasks,
+    queryKey: ["tasks"], // Clave única para la consulta. Ayuda a React Query a identificar la consulta en la caché.
+    queryFn: fetchTasks, // Función que obtiene los datos.
   });
 
+  // Devuelve los estados de la consulta para ser usados en el componente.
   return { isLoading, isError, data };
 };
 
-// Create task hook
+// Hook para crear una tarea
 export const useCreateTask = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); // Obtiene el cliente de consulta para invalidar cachés.
 
   const mutation = useMutation<Task, Error, CreateTaskVariables>({
-    mutationFn: ({ taskTitle }: CreateTaskVariables) => createTask(taskTitle),
+    mutationFn: ({ taskTitle }: CreateTaskVariables) => createTask(taskTitle), // Función que realiza la mutación (creación de tarea).
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      toast.success("Task added");
+      queryClient.invalidateQueries({ queryKey: ["tasks"] }); // Invalida la caché para las tareas, provocando una nueva obtención de datos.
+      toast.success("Task added"); // Muestra un mensaje de éxito.
     },
     onError: (error: Error) => {
-      toast.error(error.message || "Error adding task");
+      toast.error(error.message || "Error adding task"); // Muestra un mensaje de error si ocurre uno.
     },
   });
 
+  // Devuelve la función de mutación y estados relacionados.
   return {
-    createTask: mutation.mutate,
-    isLoading: mutation.status === "pending",
-    isError: mutation.status === "error",
-    error: mutation.error,
+    createTask: mutation.mutate, // Función para ejecutar la mutación.
+    isLoading: mutation.status === "pending", // Estado de carga.
+    isError: mutation.status === "error", // Estado de error.
+    error: mutation.error, // Objeto de error si ocurrió uno.
   };
 };
 
-// Edit task hook
+// Hook para editar una tarea
 export const useEditTask = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); // Obtiene el cliente de consulta para invalidar cachés.
 
   return useMutation({
     mutationFn: ({ taskId, isDone }: EditTaskVariables) =>
-      editTask(taskId, isDone),
+      editTask(taskId, isDone), // Función que realiza la mutación (edición de tarea).
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["tasks"] }); // Invalida la caché para las tareas.
     },
     onError: (error: Error) => {
-      toast.error(error.message || "Error editing task");
+      toast.error(error.message || "Error editing task"); // Muestra un mensaje de error si ocurre uno.
     },
   });
 };
 
-// Delete task hook
+// Hook para eliminar una tarea
 export const useDeleteTask = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); // Obtiene el cliente de consulta para invalidar cachés.
 
   const mutation = useMutation({
-    mutationFn: ({ taskId }: DeleteTaskVariables) => deleteTaskApi(taskId),
+    mutationFn: ({ taskId }: DeleteTaskVariables) => deleteTaskApi(taskId), // Función que realiza la mutación (eliminación de tarea).
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
-      toast.success("Task deleted");
+      queryClient.invalidateQueries({ queryKey: ["tasks"] }); // Invalida la caché para las tareas.
+      toast.success("Task deleted"); // Muestra un mensaje de éxito.
     },
     onError: (error: Error) => {
-      toast.error(error.message || "Error deleting task");
+      toast.error(error.message || "Error deleting task"); // Muestra un mensaje de error si ocurre uno.
     },
   });
 
+  // Devuelve la función de mutación y estados relacionados.
   return {
-    deleteTask: mutation.mutate,
-    isLoading: mutation.status === "pending",
-    isError: mutation.isError,
-    error: mutation.error,
+    deleteTask: mutation.mutate, // Función para ejecutar la mutación.
+    isLoading: mutation.status === "pending", // Estado de carga.
+    isError: mutation.isError, // Estado de error.
+    error: mutation.error, // Objeto de error si ocurrió uno.
   };
 };
