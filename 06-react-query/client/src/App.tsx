@@ -4,9 +4,9 @@ import { ItemType } from "./types";
 import { Items } from "./Items";
 import { toast, ToastContainer } from "react-toastify";
 import { v4 as uuid } from "uuid";
-import { TasksApiAdapter } from "./utils";
+import { BASE_URL, TasksApiAdapter } from "./utils";
 
-const url = "http://localhost:5000/api/tasks";
+const url = BASE_URL;
 
 function App() {
   const [items, setItems] = useState<ItemType[]>([]);
@@ -17,32 +17,36 @@ function App() {
       const data = await taskApi.get<{ taskList: ItemType[] }>(url);
       const { taskList } = data;
 
-      // Asegurarse de que `taskList` sea un array antes de asignarlo
       if (Array.isArray(taskList)) {
         setItems(taskList);
       } else {
         console.error("Expected taskList to be an array");
-        setItems([]); // Mantén `items` como un array vacío si la estructura no es correcta
+        setItems([]);
       }
     } catch (error) {
       console.error("Failed to fetch tasks", error);
-      setItems([]); // Mantén `items` como un array vacío en caso de error
+      setItems([]);
     }
   };
 
-  useEffect(() => {
-    fetchTask();
-  }, []);
-
-  const addItem = (itemName: string) => {
-    const newItems = {
+  const addItem = async (itemTitle: string) => {
+    const newItem = {
       id: uuid(),
-      name: itemName,
-      completed: false,
+      title: itemTitle,
+      isDone: false,
     };
-    const updatedItems = [...items, newItems];
-    // setItems(updatedItems);
-    toast.success("item added to the list");
+
+    try {
+      const addedItem = await taskApi.post<ItemType, typeof newItem>(
+        url,
+        newItem
+      );
+      setItems((prevItems) => [...prevItems, addedItem]);
+      toast.success("Item added to the list");
+    } catch (error) {
+      console.error("Failed to add item", error);
+      toast.error("Failed to add item");
+    }
   };
 
   const removeItem = (itemId: string) => {
@@ -57,9 +61,13 @@ function App() {
     setItems(updatedItems);
   };
 
+  useEffect(() => {
+    fetchTask();
+  }, []);
+
   return (
     <section className="section-center">
-      {/* <ToastContainer position="top-center" /> */}
+      <ToastContainer position="top-center" />
       <Form addItem={addItem} />
       <Items items={items} removeItem={removeItem} editItem={editItem} />
     </section>

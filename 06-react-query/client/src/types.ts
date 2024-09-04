@@ -1,7 +1,7 @@
 export type ItemType = { id: string; title: string; isDone: boolean };
 
 export type AddItemType = {
-  addItem: (itemName: string) => void;
+  addItem: (itemTitle: string) => void;
 };
 
 export type ItemProps = {
