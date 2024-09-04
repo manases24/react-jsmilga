@@ -14,7 +14,7 @@ export const createTask = async (taskTitle: string): Promise<Task> => {
         title: taskTitle,
       }
     );
-    return response.taskList; // Asegúrate de que `response.task` esté definido en `TaskResponse`
+    return response.taskList;
   } catch (error) {
     console.error("Error creating task:", error);
     throw error;
