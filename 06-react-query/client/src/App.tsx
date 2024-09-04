@@ -4,7 +4,7 @@ import { ItemType } from "./types";
 import { Items } from "./Items";
 import { toast, ToastContainer } from "react-toastify";
 import { v4 as uuid } from "uuid";
-import { BASE_URL, TasksApiAdapter } from "./utils";
+import { BASE_URL, TasksApiAdapter } from "./services/utils";
 
 const url = BASE_URL;
 
