@@ -20,10 +20,10 @@ export const useFetchTasks = () => {
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<void, Error, CreateTaskVariables>({
+  return useMutation<Task, Error, CreateTaskVariables>({
     mutationFn: ({ taskTitle }) => createTask(taskTitle),
     onSuccess: () => {
-      queryClient.invalidateQueries("tasks");
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
       toast.success("Task added");
     },
     onError: (error) => {
@@ -38,7 +38,7 @@ export const useEditTask = () => {
   return useMutation<void, Error, EditTaskVariables>({
     mutationFn: ({ taskId, isDone }) => editTask(taskId, isDone),
     onSuccess: () => {
-      queryClient.invalidateQueries("tasks");
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },
     onError: (error) => {
       toast.error(error.message || "Error editing task");
@@ -52,7 +52,7 @@ export const useDeleteTask = () => {
   return useMutation<void, Error, DeleteTaskVariables>({
     mutationFn: ({ taskId }) => deleteTask(taskId),
     onSuccess: () => {
-      queryClient.invalidateQueries("tasks");
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
       toast.success("Task deleted");
     },
     onError: (error) => {

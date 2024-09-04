@@ -24,15 +24,11 @@ export const createTask = async (taskTitle: string): Promise<Task> => {
 export const editTask = async (
   taskId: string,
   isDone: boolean
-): Promise<Task> => {
+): Promise<void> => {
   try {
-    const response = await customFetch.patch<TaskResponse, { isDone: boolean }>(
-      `/${taskId}`,
-      {
-        isDone,
-      }
-    );
-    return response.taskList;
+    await customFetch.patch<TaskResponse, { isDone: boolean }>(`/${taskId}`, {
+      isDone,
+    });
   } catch (error) {
     console.error("Error editing task:", error);
     throw error;
