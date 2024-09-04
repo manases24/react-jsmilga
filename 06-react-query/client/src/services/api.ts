@@ -1,14 +1,14 @@
-import { customFetch } from "./httpAdapter";
+import { axiosFetch } from "./httpAdapter";
 import { TaskResponse, FetchTasksResponse, Task } from "./types";
 
 export const fetchTasks = async (): Promise<Task[]> => {
-  const response = await customFetch.get<FetchTasksResponse>("/");
+  const response = await axiosFetch.get<FetchTasksResponse>("/");
   return response.taskList;
 };
 
 export const createTask = async (taskTitle: string): Promise<Task> => {
   try {
-    const response = await customFetch.post<TaskResponse, { title: string }>(
+    const response = await axiosFetch.post<TaskResponse, { title: string }>(
       "/",
       {
         title: taskTitle,
@@ -26,7 +26,7 @@ export const editTask = async (
   isDone: boolean
 ): Promise<void> => {
   try {
-    await customFetch.patch<void, { isDone: boolean }>(`/${taskId}`, {
+    await axiosFetch.patch<void, { isDone: boolean }>(`/${taskId}`, {
       isDone,
     });
   } catch (error) {
@@ -37,7 +37,7 @@ export const editTask = async (
 
 export const deleteTask = async (taskId: string): Promise<void> => {
   try {
-    await customFetch.delete<void>(`/${taskId}`);
+    await axiosFetch.delete<void>(`/${taskId}`);
   } catch (error) {
     console.error("Error deleting task:", error);
     throw error;

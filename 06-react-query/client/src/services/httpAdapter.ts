@@ -57,6 +57,6 @@ export class TasksApiAdapter implements HttpAdapter {
   }
 }
 
-export const customFetch = new TasksApiAdapter(
+export const axiosFetch = new TasksApiAdapter(
   "http://localhost:5000/api/tasks"
 );
