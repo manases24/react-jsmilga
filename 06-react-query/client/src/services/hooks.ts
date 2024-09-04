@@ -27,7 +27,7 @@ export const useFetchTasks = () => {
 export const useCreateTask = () => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  const mutation = useMutation<Task, Error, CreateTaskVariables>({
     mutationFn: ({ taskTitle }: CreateTaskVariables) => createTask(taskTitle),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
@@ -37,6 +37,13 @@ export const useCreateTask = () => {
       toast.error(error.message || "Error adding task");
     },
   });
+
+  return {
+    createTask: mutation.mutate,
+    isLoading: mutation.status === "pending",
+    isError: mutation.status === "error",
+    error: mutation.error,
+  };
 };
 
 // Edit task hook

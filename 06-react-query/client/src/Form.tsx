@@ -1,30 +1,31 @@
-import { FormEvent, useState } from "react";
-import { AddItemType } from "./types";
+import { useState } from 'react';
+import { useCreateTask } from './services/hooks';
 
-export const Form = ({ addItem }: AddItemType) => {
-  const [newItemName, setNewItemName] = useState("");
+export const Form = () => {
+  const [newItemName, setNewItemName] = useState('');
+  const { createTask, isLoading } = useCreateTask();
 
-  function handleSubmit(e: FormEvent<HTMLElement>) {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!newItemName) return;
-
-    addItem(newItemName);
-    setNewItemName("");
-  }
+    createTask({ taskTitle: newItemName }, {
+      onSuccess: () => {
+        setNewItemName('');
+      },
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h4>tasks app</h4>
-      <div className="form-control">
+      <h4>Task Builder</h4>
+      <div className='form-control'>
         <input
-          className="form-input"
-          type="text"
+          type='text'
+          className='form-input'
           value={newItemName}
-          onChange={(e) => setNewItemName(e.target.value)}
+          onChange={(event) => setNewItemName(event.target.value)}
         />
-        <button className="btn" type="submit">
-          add item
+        <button type='submit' className='btn' disabled={isLoading}>
+          Add Task
         </button>
       </div>
     </form>
