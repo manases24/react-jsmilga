@@ -1,15 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAppContext } from "./context";
 import { UnsplashResponse } from "./services/types";
-import { UnsplashApiAdapter } from "./services/httpAdapter";
-
-const url = `https://api.unsplash.com/search/photos?client_id=${
-  import.meta.env.VITE_API_KEY
-}`;
-
-console.log("API Key:", import.meta.env.VITE_API_KEY);
-
-export const axiosFetch = new UnsplashApiAdapter(url);
+import { axiosUnplashFetch, url } from "./services/httpAdapter";
 
 export const Gallery = () => {
   const { searchTerm } = useAppContext();
@@ -18,7 +10,7 @@ export const Gallery = () => {
   const { data, isLoading, isError } = useQuery<UnsplashResponse>({
     queryKey: ["images", searchTerm],
     queryFn: async () => {
-      const response = await axiosFetch.get<UnsplashResponse>(
+      const response = await axiosUnplashFetch.get<UnsplashResponse>(
         `${url}&query=${searchTerm}`
       );
       return response;

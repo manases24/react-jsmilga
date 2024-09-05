@@ -23,3 +23,9 @@ export class UnsplashApiAdapter implements HttpAdapter {
     }
   }
 }
+
+export const url = `https://api.unsplash.com/search/photos?client_id=${
+  import.meta.env.VITE_API_KEY
+}`;
+
+export const axiosUnplashFetch = new UnsplashApiAdapter(url);
