@@ -1,4 +1,3 @@
-// SearchForm.tsx
 import { FormEvent } from "react";
 import { useAppContext } from "./context";
 
