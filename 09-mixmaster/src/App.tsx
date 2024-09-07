@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        index: true,
+   
         element: <Landing />,
         errorElement: <SinglePageError />,
         // loader: landingLoader(queryClient),
