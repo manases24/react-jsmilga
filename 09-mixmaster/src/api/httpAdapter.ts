@@ -4,7 +4,7 @@ export interface HttpAdapter {
   get<T>(url: string): Promise<T>;
 }
 
-export class CocktailSearcApiAdapter implements HttpAdapter {
+export class CocktailSearchApiAdapter implements HttpAdapter {
   private readonly axiosInstance: AxiosInstance;
 
   constructor(baseURL: string) {
@@ -27,4 +27,4 @@ export class CocktailSearcApiAdapter implements HttpAdapter {
 const cocktailSearchUrl =
   "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 
-export const axiosc = new CocktailSearcApiAdapter(cocktailSearchUrl);
+export const axiosc = new CocktailSearchApiAdapter(cocktailSearchUrl);
