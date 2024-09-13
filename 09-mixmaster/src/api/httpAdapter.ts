@@ -1,9 +1,7 @@
 import axios, { AxiosInstance } from "axios";
-
 export interface HttpAdapter {
   get<T>(url: string): Promise<T>;
 }
-
 export class CocktailSearchApiAdapter implements HttpAdapter {
   private readonly axiosInstance: AxiosInstance;
 
