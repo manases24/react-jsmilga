@@ -11,7 +11,7 @@ import {
   SinglePageError,
 } from "./pages";
 
-// import { loader as landingLoader } from './pages/Landing';
+import { loader as landingLoader } from './pages/Landing';
 // import { loader as singleCocktailLoader } from './pages/Cocktail';
 // import { action as newsletterAction } from './pages/Newsletter';
 
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

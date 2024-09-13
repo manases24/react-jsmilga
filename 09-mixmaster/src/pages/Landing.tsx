@@ -1,5 +1,14 @@
+import { useLoaderData } from "react-router-dom";
+
+
+
+export const loader = async () => {
+
+  return "something";
+};
+
 export const Landing = () => {
-  return (
-    <div>Landing</div>
-  )
-}
+  const data = useLoaderData()
+  console.log(data)
+  return <div>Landing</div>;
+};
