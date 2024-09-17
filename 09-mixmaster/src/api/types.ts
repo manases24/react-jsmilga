@@ -24,3 +24,11 @@ export type CocktailProps = {
 export type LoaderData = {
   searchTerm: string;
 };
+
+export type CocktailCardType = {
+  image: string;
+  name: string;
+  id: string;
+  info: string;
+  glass: string;
+};
