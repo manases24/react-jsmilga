@@ -1,4 +1,4 @@
-export interface Drink {
+export type Drink = {
   idDrink: string;
   strDrink: string;
   strCategory: string;
@@ -11,8 +11,16 @@ export interface Drink {
   strIngredient3?: string;
   strIngredient4?: string;
   strIngredient5?: string;
-}
+};
 
-export interface CocktailDBResponse {
+export type CocktailDBResponse = {
   drinks: Drink[];
-}
+};
+
+export type CocktailProps = {
+  drinks: Drink[] | undefined;
+};
+
+export type LoaderData = {
+  searchTerm: string;
+};
