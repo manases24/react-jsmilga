@@ -25,6 +25,7 @@ export const loader =
 
     // Obtener el término de búsqueda desde la URL
     const searchTerm = url.searchParams.get("search") || "";
+    console.log("Loader searchTerm:", searchTerm);
 
     try {
       // Asegurarse de que los datos de la consulta estén disponibles
