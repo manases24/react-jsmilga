@@ -12,7 +12,7 @@ import {
 } from "./pages";
 
 import { loader as landingLoader } from './pages/Landing';
-// import { loader as singleCocktailLoader } from './pages/Cocktail';
+import { loader as singleCocktailLoader } from './pages/Cocktail';
 // import { action as newsletterAction } from './pages/Newsletter';
 
 const queryClient = new QueryClient({
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       {
         path: "cocktail/:id",
         errorElement: <SinglePageError />,
-        // loader: singleCocktailLoader(queryClient),
+        loader: singleCocktailLoader(queryClient),
         element: <Cocktail />,
       },
       {

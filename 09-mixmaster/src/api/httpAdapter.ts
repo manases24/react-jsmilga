@@ -25,6 +25,13 @@ export class CocktailSearchApiAdapter implements HttpAdapter {
 const cocktailSearchUrl =
   "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 
+const singleCocktailUrl =
+  "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
+
 export const axioscocktailSearch = new CocktailSearchApiAdapter(
   cocktailSearchUrl
+);
+
+export const axiosSingleCocktail = new CocktailSearchApiAdapter(
+  singleCocktailUrl
 );
