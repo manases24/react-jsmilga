@@ -1,5 +1,5 @@
 import { CocktailProps } from "../api/types";
-import { Wrapper } from "../assets/wrappers/Navbar";
+import { Wrapper } from "../assets/wrappers/CocktailList";
 import { CocktailCard } from "./CocktailCard";
 
 export const CocktailList: React.FC<CocktailProps> = ({ drinks }) => {
