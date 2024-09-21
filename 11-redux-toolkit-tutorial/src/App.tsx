@@ -1,5 +1,13 @@
+import { Navbar } from "./components/Navbar";
+
 function App() {
-  return <h2>Redux Toolkit</h2>;
+  return (
+    <main>
+      {/* {isOpen && <Modal />} */}
+      <Navbar />
+      {/* <CartContainer /> */}
+    </main>
+  );
 }
 
 export default App;

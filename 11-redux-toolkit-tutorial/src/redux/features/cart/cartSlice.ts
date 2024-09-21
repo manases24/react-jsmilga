@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { axiosReduxToolKit } from "../../../api/httpAdapter";
 import { CartItem, CartState } from "../../../api/types";
+import { store } from "../../store";
+
+interface IncreaseDecreasePayload {
+  id: string;
+}
 
 const url = "https://www.course-api.com/react-useReducer-cart-project";
 
@@ -35,17 +40,17 @@ const cartSlice = createSlice({
       const itemId = action.payload;
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
     },
-    increase: (state, action: PayloadAction<string>) => {
+    increase: (state, action: PayloadAction<IncreaseDecreasePayload>) => {
       const cartItem = state.cartItems.find(
-        (item) => item.id === action.payload
+        (item) => item.id === action.payload.id
       );
       if (cartItem) {
         cartItem.amount += 1;
       }
     },
-    decrease: (state, action: PayloadAction<string>) => {
+    decrease: (state, action: PayloadAction<IncreaseDecreasePayload>) => {
       const cartItem = state.cartItems.find(
-        (item) => item.id === action.payload
+        (item) => item.id === action.payload.id
       );
       if (cartItem) {
         cartItem.amount -= 1;
@@ -83,6 +88,9 @@ const cartSlice = createSlice({
 // Exportar las acciones
 export const { clearCart, removeItem, increase, decrease, calculateTotals } =
   cartSlice.actions;
+
+// Tipo del estado de la tienda
+export type RootState = ReturnType<typeof store.getState>;
 
 // Exportar el reducer
 export default cartSlice.reducer;
