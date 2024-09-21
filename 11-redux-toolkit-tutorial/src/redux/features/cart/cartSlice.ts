@@ -90,7 +90,7 @@ export const { clearCart, removeItem, increase, decrease, calculateTotals } =
   cartSlice.actions;
 
 // Tipo del estado de la tienda
-export type RootState = ReturnType<typeof store.getState>;
-
+export type CartRootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 // Exportar el reducer
 export default cartSlice.reducer;

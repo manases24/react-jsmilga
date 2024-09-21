@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { CartIcon } from "../icons";
-import { RootState } from "../redux/features/cart/cartSlice";
+import { CartRootState } from "../redux/features/cart/cartSlice";
 
 export const Navbar = () => {
-  const { amount } = useSelector((store: RootState) => store.cart);
+  const { amount } = useSelector((store: CartRootState) => store.cart);
 
   return (
     <>
