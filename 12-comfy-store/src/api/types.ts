@@ -24,3 +24,14 @@ export type LoginUserAction = {
     jwt: string;
   };
 };
+
+// Define el tipo para el objeto de acción
+export type ActionParams = {
+  request: Request;
+};
+
+// Define el tipo para el response de tu API
+export type LoginResponse = {
+  user: User;
+  jwt: string;
+};
