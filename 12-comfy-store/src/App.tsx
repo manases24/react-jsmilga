@@ -5,6 +5,7 @@ import {
   About,
   Cart,
   Checkout,
+  Error,
   HomeLayout,
   Landing,
   Login,
@@ -12,6 +13,7 @@ import {
   Products,
   Register,
   SingleProduct,
+  
 } from "./pages";
 
 const queryClient = new QueryClient({
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout />,
-    // errorElement: <Error />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -70,13 +72,13 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    // errorElement: <Error />,
+    errorElement: <Error />,
     // action: loginAction(store),
   },
   {
     path: "/register",
     element: <Register />,
-    // errorElement: <Error />,
+    errorElement: <Error />,
     // action: registerAction,
   },
 ]);
