@@ -1,4 +1,3 @@
-// Login.tsx
 import { Form, Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Store } from "@reduxjs/toolkit";
@@ -17,9 +16,8 @@ export const action = (store: Store) => async ({ request }: ActionParams) => {
   };
 
   try {
-    // Asegúrate de que el tipo de respuesta es LoginResponse
     const response = await customFetch.post<LoginData, LoginResponse>('/auth/local', data);
-    store.dispatch(loginUser(response)); // Aquí debería ser response (LoginResponse)
+    store.dispatch(loginUser(response));
     toast.success('Logged in successfully');
     return redirect('/');
   } catch (error) {
