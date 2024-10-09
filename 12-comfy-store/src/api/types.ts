@@ -1,3 +1,4 @@
+// types.ts
 export type InputField = {
   label: string;
   name: string;
@@ -20,7 +21,7 @@ export type UserState = {
 
 export type LoginUserAction = {
   payload: {
-    user: Omit<User, "token">;
+    user: Omit<User, "token">; // Excluye el token del usuario
     jwt: string;
   };
 };
@@ -34,4 +35,21 @@ export type ActionParams = {
 export type LoginResponse = {
   user: User;
   jwt: string;
+};
+
+// Tipo para los datos de login
+export type LoginData = {
+  identifier: string;
+  password: string;
+};
+
+// Tipo para el error
+export type ErrorResponse = {
+  response?: {
+    data?: {
+      error?: {
+        message: string;
+      };
+    };
+  };
 };

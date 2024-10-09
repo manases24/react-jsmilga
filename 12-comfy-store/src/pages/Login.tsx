@@ -1,3 +1,4 @@
+// Login.tsx
 import { Form, Link, redirect, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Store } from "@reduxjs/toolkit";
@@ -5,26 +6,31 @@ import { toast } from 'react-toastify';
 import { FormInput, SubmitBtn } from "../components/";
 import { customFetch } from "../api/httpAdapter";
 import { loginUser } from "../redux/features/user/userSlice";
-import { ActionParams, LoginResponse, User } from "../api/types";
+import { ActionParams, ErrorResponse, LoginData, LoginResponse } from "../api/types";
 
 export const action = (store: Store) => async ({ request }: ActionParams) => {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
+  
+  const data: LoginData = {
+    identifier: formData.get('identifier') as string,
+    password: formData.get('password') as string,
+  };
 
   try {
-    const response = await customFetch.post<LoginResponse, { data: LoginResponse }>('/auth/local', data);
-    store.dispatch(loginUser(response.data));
-    toast.success('logged in successfully');
+    // Asegúrate de que el tipo de respuesta es LoginResponse
+    const response = await customFetch.post<LoginData, LoginResponse>('/auth/local', data);
+    store.dispatch(loginUser(response)); // Aquí debería ser response (LoginResponse)
+    toast.success('Logged in successfully');
     return redirect('/');
   } catch (error) {
+    const errorResponse = error as ErrorResponse;
     const errorMessage =
-      error?.response?.data?.error?.message ||
-      'please double check your credentials';
+      errorResponse.response?.data?.error?.message ||
+      'Please double check your credentials';
     toast.error(errorMessage);
     return null;
   }
 };
-
 
 export const Login = () => {
   const dispatch = useDispatch();
@@ -32,17 +38,17 @@ export const Login = () => {
 
   const loginAsGuestUser = async () => {
     try {
-      // Especificar el tipo del response aquí
-      const response = await customFetch.post<{ identifier: string; password: string }, { user: User; jwt: string }>('/auth/local', {
+      // Asegúrate de que el tipo del response aquí sea correcto
+      const response = await customFetch.post<LoginData, LoginResponse>('/auth/local', {
         identifier: 'test@test.com',
         password: 'secret',
       });
-      dispatch(loginUser(response));
-      toast.success('welcome guest user');
+      dispatch(loginUser(response)); // Aquí debería ser response (LoginResponse)
+      toast.success('Welcome guest user');
       navigate('/');
     } catch (error) {
       console.log(error);
-      toast.error('guest user login error. please try again');
+      toast.error('Guest user login error. Please try again');
     }
   };
   
@@ -53,17 +59,17 @@ export const Login = () => {
         className='card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4'
       >
         <h4 className='text-center text-3xl font-bold'>Login</h4>
-        <FormInput type='email' label='email' name='identifier' />
-        <FormInput type='password' label='password' name='password' />
+        <FormInput type='email' label='Email' name='identifier' />
+        <FormInput type='password' label='Password' name='password' />
         <div className='mt-4'>
-          <SubmitBtn text='login' />
+          <SubmitBtn text='Login' />
         </div>
         <button
           type='button'
           className='btn btn-secondary btn-block'
           onClick={loginAsGuestUser}
         >
-          guest user
+          Guest User
         </button>
         <p className='text-center'>
           Not a member yet?
@@ -71,7 +77,7 @@ export const Login = () => {
             to='/register'
             className='ml-2 link link-hover link-primary capitalize'
           >
-            register
+            Register
           </Link>
         </p>
       </Form>
